@@ -1,0 +1,158 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>HTML5 FUN</title>
+  <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+  <meta name="viewport" content="initial-scale=1.0,minimum-scale=1,maximum-scale=1.0,user-scalable=no">
+  <meta name="referrer" content="no-referrer" />
+</head>  
+
+<body>
+
+<script charset="utf-8" id="settingJS" type="text/javascript">
+//=======================================================
+// HTML5 Spelling 題庫設定檔: 使用 Google TTS
+//=======================================================
+
+// 上方看板標題
+title = '食物（一）Part 1';
+
+// 上載成績單記錄網址
+logger_url = '';
+
+// 是否使用 TTS 語音
+tts_enabled = true;
+
+// Google TTS 設定
+tts_language = 'en';
+tts_speed = 0.3;
+tts_base_url = 'https://translate.google.com/translate_tts?ie=UTF-8&tl=' + tts_language + '&client=tw-ob&ttsspeed=' + tts_speed + '&q=';
+tts_cut_last_seconds = 0;
+
+// 是否亂數抽題
+order_by_random = true;
+
+// 計時秒數，0 代表不計時
+timer = 0;
+
+// 答對加分
+number_of_points_for_one_question = 10;
+
+// 答錯扣分
+number_of_points_deduct = 10;
+
+// 總分達到多少結束遊戲
+number_of_points_goal = 240;
+
+// 語音播放速度
+audioPlaybackRate = 1;
+
+// 每題拿掉幾個字母
+blanks_total_number = 5;
+
+// 欄位分隔符號
+seperator = '##';
+
+// 題庫
+questionLines = function(){/*--這一行請勿更改--
+breakfast##早餐
+lunch##午餐
+dinner##晚餐
+meal##餐
+apple##蘋果
+banana##香蕉
+grape##葡萄
+kiwi##奇異果
+lemon##檸檬
+peach##桃子
+pumpkin##南瓜
+strawberry##草莓
+watermelon##西瓜
+chicken##雞肉
+duck##鴨肉
+egg##蛋
+beef##牛肉
+fish##魚肉
+ham##火腿
+hot dog##熱狗
+pork##豬肉
+fruit##水果
+orange##橘子
+-----*/}.toString().replace(/\r/g,"").slice("function(){/*--這一行請勿更改--".length+1,-9);
+
+//=======================================================
+// 以下為執行程式，不需要修改
+//=======================================================
+
+// HTML 解碼
+decodeHTML = function(html) {
+  var txt = document.createElement("textarea");
+  txt.innerHTML = html;
+  return txt.value;
+};
+
+// 將指定清單中的文字型態變數進行 HTML 解碼
+var decodeList = [
+  'title',
+  'blanks_total_number',
+  'order_by_random',
+  'tts_enabled',
+  'timer',
+  'number_of_points_for_one_question',
+  'number_of_points_deduct',
+  'number_of_points_goal',
+  'audioPlaybackRate',
+  'logger_url',
+  'questionLines'
+];
+
+for(var nIndex = 0; nIndex < decodeList.length; nIndex++) {
+  var varName = decodeList[nIndex];
+  if(typeof(window[varName]) == 'string') {
+    window[varName] = decodeHTML(window[varName]);
+  }
+}
+
+// no-referrer，避免 TTS 被 referrer 影響
+var metaReferrer = null;
+var meta = document.getElementsByTagName('meta');
+
+for(var nIndex = 0; nIndex < meta.length; nIndex++) {
+  if(meta[nIndex].name == "referrer") {
+    metaReferrer = meta[nIndex];
+    break;
+  }
+}
+
+if(metaReferrer == null) {
+  metaReferrer = document.createElement('meta');
+  metaReferrer.name = "referrer";
+  document.getElementsByTagName('head')[0].appendChild(metaReferrer);
+}
+
+metaReferrer.content = "no-referrer";
+</script>
+
+<script 
+  type="text/javascript" 
+  charset="utf-8" 
+  id="injectionJS" 
+  src="https://gsyan888.github.io/html5_fun/html5_fun_embeded.js" 
+  autostart="false" 
+  modulename="spelling">
+</script>
+
+<script id="closeAppFunctionJS">
+try {
+  console.log('is in iFrame: ' + isInIFrame);
+} catch(error) { }
+
+if(typeof(isInIFrame) != 'undefined' && isInIFrame) {
+  closeApp = function(e) {
+    window.close();
+  };
+}
+</script>
+
+</body>
+</html>
